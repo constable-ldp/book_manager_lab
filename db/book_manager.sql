@@ -12,5 +12,6 @@ CREATE TABLE books (
     title VARCHAR(255),
     genre VARCHAR(255),
     description VARCHAR(255),
+    rating INT,
     author_id INT REFERENCES authors(id)
     );
