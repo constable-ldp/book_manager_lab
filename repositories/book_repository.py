@@ -19,7 +19,7 @@ def select_all():
     results = run_sql(sql)
     for row in results:
         author_id = author_repository.select(row['author_id'])
-        book = Book(row['title'], row['genre'], row['description'], author_id, row['rating'])
+        book = Book(row['title'], row['genre'], row['description'], author_id, row['rating'], row['id'])
         books.append(book)
     return books
 
@@ -29,8 +29,8 @@ def select(id):
     values = [id]
     result = run_sql(sql, values)[0]
     if result is not None:
-        author_id = author_repository.select(row['author_id'])
-        book = Book(result['title'], result['genre'], result['description'], author_id, result['rating'])
+        author_id = author_repository.select(result['author_id'])
+        book = Book(result['title'], result['genre'], result['description'], author_id, result['rating'], result['id'])
     return book
 
 def delete_all():
@@ -40,4 +40,4 @@ def delete_all():
 def delete(id):
     sql = "DELETE FROM books WHERE id = %s"
     values = [id]
-    run_sql(sql)
+    run_sql(sql, values)
